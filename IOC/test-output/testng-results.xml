@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="18250" started-at="2022-01-28T14:12:25Z" finished-at="2022-01-28T14:12:43Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="18250" started-at="2022-01-28T14:12:25Z" finished-at="2022-01-28T14:12:43Z">
+      <class name="testScripts.ScheduleManagementFlow">
+        <test-method status="PASS" signature="before()[pri:0, instance:testScripts.ScheduleManagementFlow@3532ec19]" name="before" is-config="true" duration-ms="6728" started-at="2022-01-28T14:12:25Z" finished-at="2022-01-28T14:12:32Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- before -->
+        <test-method status="PASS" signature="ApplyLicenseForBusiness()[pri:0, instance:testScripts.ScheduleManagementFlow@3532ec19]" name="ApplyLicenseForBusiness" duration-ms="11485" started-at="2022-01-28T14:12:32Z" finished-at="2022-01-28T14:12:43Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ApplyLicenseForBusiness -->
+      </class> <!-- testScripts.ScheduleManagementFlow -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
