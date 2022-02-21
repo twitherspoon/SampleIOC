@@ -7,12 +7,13 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import commons.DataBaseAccessUtility;
+import commons.Log;
 import commons.PropertyLoader;
 import commons.SeleniumHelper;
 import pages.EMSDashboard;
 import pages.LoginPage;
 
-public class ScheduleManagementFlow {
+public class ScheduleManagementFlow extends Log{
 
 	PropertyLoader prop = new PropertyLoader("constants.properties");
 	SeleniumHelper helper;
@@ -28,7 +29,7 @@ public class ScheduleManagementFlow {
 	}
 
 	@Test
-	public void ApplyLicenseForBusiness() throws InterruptedException, AWTException {
+	public void ScheduleManagement() throws InterruptedException, AWTException {
 		
 		LoginPage login = new LoginPage(helper);
 		EMSDashboard dashboard = new EMSDashboard(helper);
@@ -40,10 +41,10 @@ public class ScheduleManagementFlow {
 		helper.navigateTo(prop.getPropertyValue("urlEMSPortal"));
 		
 		if(dashboard.dashboardPageLoad()) {
-			
+			Log.fail("The dashboard did not load properly!");
 			dashboard.clickSportsNavLink();
 			if(dashboard.sportsSectionLoad()) {
-				
+				Log.pass("The sports section on the dashboard loaded successfully!");
 			}
 			else {
 				System.err.println("Sports section didn't load!!");
