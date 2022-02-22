@@ -2,6 +2,7 @@ package testScripts;
 
 import java.awt.AWTException;
 import java.io.IOException;
+import java.util.HashMap;
 
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -36,8 +37,10 @@ public class ScheduleManagementFlow extends Log{
 		LoginPage login = new LoginPage(helper);
 		EMSDashboard dashboard = new EMSDashboard(helper);
 		
-		login.typeUsername(prop.getPropertyValue("userName"));
-		login.typePassword(prop.getPropertyValue("password"));
+		String queryDetails = "select * from Creds";
+		HashMap<String,String> creds = db.readAccessDB(queryDetails);
+		login.typeUsername(creds.get("Username"));
+		login.typePassword(creds.get("Password"));
 		login.clickLoginBtn();
 		
 		helper.navigateTo(prop.getPropertyValue("urlEMSPortal"));
