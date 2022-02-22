@@ -1,6 +1,7 @@
 package testScripts;
 
 import java.awt.AWTException;
+import java.io.IOException;
 
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -22,14 +23,15 @@ public class ScheduleManagementFlow extends Log{
 	@BeforeTest
 	public void before() {
 
-		//db = new DataBaseAccessUtility(prop.getPropertyValue("database"));
+		db = new DataBaseAccessUtility(prop.getPropertyValue("database"));
 
 		helper = new SeleniumHelper(prop.getPropertyValue("browser"), prop.getPropertyValue("url"));
 		helper.initialization();
+		Log.setup(this.getClass().getSimpleName());
 	}
 
 	@Test
-	public void ScheduleManagement() throws InterruptedException, AWTException {
+	public void ScheduleManagement() throws InterruptedException, AWTException, IOException {
 		
 		LoginPage login = new LoginPage(helper);
 		EMSDashboard dashboard = new EMSDashboard(helper);
@@ -56,8 +58,9 @@ public class ScheduleManagementFlow extends Log{
 	}
 	
 
-	@AfterTest (enabled = false)
+	@AfterTest (enabled = true)
 	public void after() {
 		helper.close();
+		Log.tearDown();
 	}
 }

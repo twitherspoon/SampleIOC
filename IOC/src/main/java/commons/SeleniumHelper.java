@@ -32,7 +32,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SeleniumHelper {
 
-	public WebDriver driver;
+	public static WebDriver driver;
 	int implicitWait = 30;
 	int pageLoadTime = 30;
 	int explicitWait = 30;
