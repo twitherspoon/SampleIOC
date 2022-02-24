@@ -22,7 +22,7 @@ public class DataBaseAccessUtility {
 					+ "registering MS Access JDBC driver");
 			cnfex.printStackTrace();
 		}try {
-			String currentdir=System.getProperty("user.dir")+"\\Data\\"+databaseName+".accdb"; 
+			String currentdir=System.getProperty("user.dir")+"/Data/"+databaseName+".accdb"; 
 			System.out.println("Current data dir="+currentdir);
 			String dbUrl="jdbc:ucanaccess://"+currentdir;
 			connection =DriverManager.getConnection(dbUrl);
