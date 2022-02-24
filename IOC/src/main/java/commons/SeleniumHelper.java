@@ -51,7 +51,7 @@ public class SeleniumHelper {
 	}
 
 	public void initialization() {
-		String currentDir=System.getProperty("user.dir")+"\\libs\\";
+		String currentDir=System.getProperty("user.dir")+"/libs/";
 		if(browser.equalsIgnoreCase("Chrome")) {
 			System.setProperty("webdriver.chrome.driver", currentDir+ "chromedriver.exe");
 			driver=new ChromeDriver();
