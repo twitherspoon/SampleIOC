@@ -12,14 +12,14 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
 
 public class Log {
 
 	static ExtentTest test;
 	static ExtentReports report;
-	static ExtentSparkReporter spark ;
+	static ExtentHtmlReporter htmlReporter ;
 	
 	public static String testcaseName = null;
 	public static String browser = null;
@@ -27,10 +27,14 @@ public class Log {
 
 	public static void setup(String fileName) {
 
-		htmlReporter = new ExtentHtmlReporter("Reports/"+fileName+"_"+SeleniumHelper.timeStamp()+".html");
-		report = new ExtentReports();		
+		//htmlReporter = new ExtentHtmlReporter("Reports/"+fileName+"_"+SeleniumHelper.timeStamp()+".html");
+		htmlReporter = new ExtentHtmlReporter("Reports/index.html");
+		report = new ExtentReports();
+		report.attachReporter(htmlReporter);
 		test = report.createTest(fileName);
-
+		htmlReporter.config().setReportName("International Olympic Comittee");
+		htmlReporter.config().setDocumentTitle("Automation report IOC");
+		
 	}
 
 	public static void pass(String logMessage) {
@@ -47,7 +51,7 @@ public class Log {
 
 
 	public static void tearDown() {
-		report.attachReporter(spark);
+		
 		report.flush();
 	}
 
