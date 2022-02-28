@@ -27,7 +27,7 @@ public class Log {
 
 	public static void setup(String fileName) {
 
-		htmlReporter = new ExtentHtmlReporter("Reports\\index.html");
+		htmlReporter = new ExtentHtmlReporter("Reports/index.html");
 		report = new ExtentReports();		
 		test = report.createTest(fileName);
 
