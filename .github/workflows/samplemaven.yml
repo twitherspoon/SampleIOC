@@ -24,11 +24,8 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file IOC/pom.xml
-    - name: Install rsync
-      run: |
-       apt-get update && apt-get install -y rsync
-    - name: Deploy pages
-      uses: JamesIves/github-pages-deploy-action@4.1.5
+    - name: Deploy report page
+      uses: peaceiris/actions-gh-pages@v3
       with:
-        branch: gh-pages
-        folder: ./IOC/Reports
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./IOC/public
