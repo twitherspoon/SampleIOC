@@ -1,5 +1,7 @@
 package commons;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -32,11 +34,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import software.amazon.awssdk.regions.Region;
-import software.amazon.awssdk.services.devicefarm.*;
-import software.amazon.awssdk.services.devicefarm.model.*;
-
-import java.net.MalformedURLException;
-import java.net.URL;
+import software.amazon.awssdk.services.devicefarm.DeviceFarmClient;
+import software.amazon.awssdk.services.devicefarm.model.CreateTestGridUrlRequest;
+import software.amazon.awssdk.services.devicefarm.model.CreateTestGridUrlResponse;
 
 
 public class SeleniumHelper {
@@ -59,7 +59,7 @@ public class SeleniumHelper {
 		Assert.assertEquals(actualText, expectedText);
 	}
 
-	public void initialization() throws MalformedURLException {
+	public void initialization() {
 		
 		if(browser.equalsIgnoreCase("aws")) {
 			 String myProjectARN = "arn:aws:devicefarm:us-west-2:472842628937:testgrid-project:fc0eb1ca-9f14-4da3-a274-d7b27b0fe64b";
@@ -69,7 +69,13 @@ public class SeleniumHelper {
 			      .projectArn(myProjectARN)
 			      .build();
 			    CreateTestGridUrlResponse response = client.createTestGridUrl(request);
-			    URL testGridUrl = new URL(response.url());
+			    URL testGridUrl = null;
+				try {
+					testGridUrl = new URL(response.url());
+				} catch (MalformedURLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			    // You can now pass this URL into RemoteWebDriver.
 			     driver = new RemoteWebDriver(testGridUrl, DesiredCapabilities.chrome());
 		}
