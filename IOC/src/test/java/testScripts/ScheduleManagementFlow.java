@@ -22,7 +22,7 @@ public class ScheduleManagementFlow extends Log{
 	DataBaseAccessUtility db;
 
 	@BeforeTest
-	public void before() {
+	public void before() throws MalformedURLException {
 
 		db = new DataBaseAccessUtility(prop.getPropertyValue("database"));
 
