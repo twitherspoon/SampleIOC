@@ -50,7 +50,19 @@ public class SeleniumHelper {
 		Assert.assertEquals(actualText, expectedText);
 	}
 
-	public void initialization() {
+	public void initialization() throws MalformedURLException{
+		if(browser.equalsIgnoreCase("aws")) {
+			 String myProjectARN = "arn:aws:devicefarm:us-west-2:472842628937:testgrid-project:fc0eb1ca-9f14-4da3-a274-d7b27b0fe64b";
+			    DeviceFarmClient client  = DeviceFarmClient.builder().region(Region.US_EAST_1).build();
+			    CreateTestGridUrlRequest request = CreateTestGridUrlRequest.builder()
+			      .expiresInSeconds(300)
+			      .projectArn(myProjectARN)
+			      .build();
+			    CreateTestGridUrlResponse response = client.createTestGridUrl(request);
+			    URL testGridUrl = new URL(response.url());
+			    // You can now pass this URL into RemoteWebDriver.
+			     driver = new RemoteWebDriver(testGridUrl, DesiredCapabilities.chrome());
+		}
 		String currentDir=System.getProperty("user.dir")+"/libs/";
 		if(browser.equalsIgnoreCase("Chrome")) {
 			System.setProperty("webdriver.chrome.driver", currentDir+ "chromedriver.exe");
