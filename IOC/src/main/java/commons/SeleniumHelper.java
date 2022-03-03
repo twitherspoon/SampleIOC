@@ -38,6 +38,7 @@ import software.amazon.awssdk.services.devicefarm.model.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+
 public class SeleniumHelper {
 
 	public static WebDriver driver;
@@ -58,7 +59,8 @@ public class SeleniumHelper {
 		Assert.assertEquals(actualText, expectedText);
 	}
 
-	public void initialization() throws MalformedURLException{
+	public void initialization() throws MalformedURLException {
+		
 		if(browser.equalsIgnoreCase("aws")) {
 			 String myProjectARN = "arn:aws:devicefarm:us-west-2:472842628937:testgrid-project:fc0eb1ca-9f14-4da3-a274-d7b27b0fe64b";
 			    DeviceFarmClient client  = DeviceFarmClient.builder().region(Region.US_EAST_1).build();
@@ -71,6 +73,8 @@ public class SeleniumHelper {
 			    // You can now pass this URL into RemoteWebDriver.
 			     driver = new RemoteWebDriver(testGridUrl, DesiredCapabilities.chrome());
 		}
+		
+		    
 		String currentDir=System.getProperty("user.dir")+"/libs/";
 		if(browser.equalsIgnoreCase("Chrome")) {
 			System.setProperty("webdriver.chrome.driver", currentDir+ "chromedriver.exe");
