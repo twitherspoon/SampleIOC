@@ -29,6 +29,12 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.devicefarm.*;
+import software.amazon.awssdk.services.devicefarm.model.*;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class SeleniumHelper {
 
