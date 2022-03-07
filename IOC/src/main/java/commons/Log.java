@@ -47,10 +47,9 @@ public class Log {
 	public static void fail(String logMessage) throws IOException {
 
 		String scrnshotpath1=capture(SeleniumHelper.driver);
-		//scrnshotpath = "."+scrnshotpath;
-		scrnshotpath2="https://github.com/abrar1001/SampleIOC/tree/gh-pages/Screenshots/"+scrnshotpath1;
-		//System.out.println(scrnshotpath);
-		test.log(Status.FAIL, logMessage,MediaEntityBuilder.createScreenCaptureFromPath(scrnshotpath2).build());
+		scrnshotpath = "."+scrnshotpath;
+		System.out.println(scrnshotpath);
+		test.log(Status.FAIL, logMessage,MediaEntityBuilder.createScreenCaptureFromPath(scrnshotpath).build());
 		
 	}
 
@@ -64,8 +63,8 @@ public class Log {
 	public static String capture(WebDriver driver) throws IOException {
 		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		File Dest = new File("./Reports/Screenshots/" + System.currentTimeMillis()+ ".PNG");
-		//String errflpath = "./Reports/Screenshots/" + System.currentTimeMillis()+ ".PNG";
-		String errflpath = System.currentTimeMillis()+ ".PNG";
+		String errflpath = "./Reports/Screenshots/" + System.currentTimeMillis()+ ".PNG";
+		
 		System.out.println(errflpath);
 		FileUtils.copyFile(scrFile, Dest);
 		return errflpath;
