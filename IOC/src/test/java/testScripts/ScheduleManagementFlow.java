@@ -61,7 +61,7 @@ public class ScheduleManagementFlow extends Log{
 	}
 	
 
-	@AfterTest (enabled = false)
+	@AfterTest (enabled = true)
 	public void after() {
 		helper.close();
 		Log.tearDown();
