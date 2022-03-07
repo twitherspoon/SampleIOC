@@ -29,7 +29,7 @@ public class Log {
 	public static void setup(String fileName) {
 
 		//htmlReporter = new ExtentHtmlReporter("Reports/"+fileName+"_"+SeleniumHelper.timeStamp()+".html");
-		htmlReporter = new ExtentHtmlReporter("index.html");
+		htmlReporter = new ExtentHtmlReporter("Reports/index.html");
 		report = new ExtentReports();
 		report.attachReporter(htmlReporter);
 		test = report.createTest(fileName);
@@ -59,7 +59,7 @@ public class Log {
 
 	public static String capture(WebDriver driver) throws IOException {
 		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-		File Dest = new File("Screenshots/" + System.currentTimeMillis()+ ".png");
+		File Dest = new File("Reports/Screenshots/" + System.currentTimeMillis()+ ".png");
 		String errflpath = Dest.getAbsolutePath();
 		FileUtils.copyFile(scrFile, Dest);
 		return errflpath;
