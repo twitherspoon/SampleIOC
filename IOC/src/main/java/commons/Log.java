@@ -47,9 +47,10 @@ public class Log {
 	public static void fail(String logMessage) throws IOException {
 
 		String scrnshotpath=capture(SeleniumHelper.driver);
-		//scrnshotpath = "."+scrnshotpath;
+		scrnshotpath = "."+scrnshotpath;
 		//System.out.println(scrnshotpath);
 		test.log(Status.FAIL, logMessage,MediaEntityBuilder.createScreenCaptureFromPath(scrnshotpath).build());
+		
 	}
 
 
