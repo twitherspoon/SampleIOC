@@ -46,10 +46,11 @@ public class Log {
 
 	public static void fail(String logMessage) throws IOException {
 
-		String scrnshotpath=capture(SeleniumHelper.driver);
-		scrnshotpath = "."+scrnshotpath;
+		String scrnshotpath1=capture(SeleniumHelper.driver);
+		//scrnshotpath = "."+scrnshotpath;
+		scrnshotpath2="https://github.com/abrar1001/SampleIOC/tree/gh-pages/Screenshots";
 		//System.out.println(scrnshotpath);
-		test.log(Status.FAIL, logMessage,MediaEntityBuilder.createScreenCaptureFromPath(scrnshotpath).build());
+		test.log(Status.FAIL, logMessage,MediaEntityBuilder.createScreenCaptureFromPath(scrnshotpath2).build());
 		
 	}
 
