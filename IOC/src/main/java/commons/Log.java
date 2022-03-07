@@ -47,6 +47,7 @@ public class Log {
 	public static void fail(String logMessage) throws IOException {
 
 		String scrnshotpath=capture(SeleniumHelper.driver);
+		scrnshotpath = "."+scrnshotpath;
 		test.log(Status.FAIL, logMessage,MediaEntityBuilder.createScreenCaptureFromPath(scrnshotpath).build());
 	}
 
@@ -59,7 +60,7 @@ public class Log {
 
 	public static String capture(WebDriver driver) throws IOException {
 		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-		File Dest = new File("Reports/Screenshots/" + System.currentTimeMillis()+ ".png");
+		File Dest = new File("./Reports/Screenshots/" + System.currentTimeMillis()+ ".png");
 		String errflpath = Dest.getAbsolutePath();
 		FileUtils.copyFile(scrFile, Dest);
 		return errflpath;
