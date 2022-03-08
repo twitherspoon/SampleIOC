@@ -28,7 +28,7 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-west-2
-        role-to-assume: arn:aws:devicefarm:us-west-2:472842628937:testgrid-project:fc0eb1ca-9f14-4da3-a274-d7b27b0fe64b:role/my-github-actions-role
+        role-to-assume: arn:aws:devicefarm:us-west-2:472842628937:testgrid-project:fc0eb1ca-9f14-4da3-a274-d7b27b0fe64b
     - name: Build with Maven
       run: mvn -B package --file IOC/pom.xml
     - name: Deploy report page
