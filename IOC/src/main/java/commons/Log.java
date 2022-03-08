@@ -62,8 +62,8 @@ public class Log {
 
 	public static String capture(WebDriver driver) throws IOException {
 		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-		File Dest = new File("./Reports/Screenshots/" + System.currentTimeMillis()+ ".PNG");
-		String errflpath = "./Reports/Screenshots/" + System.currentTimeMillis()+ ".PNG";
+		File Dest = new File("./SampleIOC/Screenshots/" + System.currentTimeMillis()+ ".PNG");
+		String errflpath = "./SampleIOC/Screenshots/" + System.currentTimeMillis()+ ".PNG";
 		
 		System.out.println(errflpath);
 		FileUtils.copyFile(scrFile, Dest);
