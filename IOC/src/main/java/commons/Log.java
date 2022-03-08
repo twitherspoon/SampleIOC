@@ -29,7 +29,7 @@ public class Log {
 	public static void setup(String fileName) {
 
 		//htmlReporter = new ExtentHtmlReporter("Reports/"+fileName+"_"+SeleniumHelper.timeStamp()+".html");
-		htmlReporter = new ExtentHtmlReporter("./Reports/index.html");
+		htmlReporter = new ExtentHtmlReporter("./SampleIOC/index.html");
 		report = new ExtentReports();
 		report.attachReporter(htmlReporter);
 		test = report.createTest(fileName);
