@@ -2,6 +2,7 @@ package testScripts;
 
 import java.awt.AWTException;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.HashMap;
 
 import org.testng.annotations.AfterTest;
@@ -22,11 +23,12 @@ public class ScheduleManagementFlow extends Log{
 	DataBaseAccessUtility db;
 
 	@BeforeTest
-	public void before(){
-
+	public void before() throws MalformedURLException{
 		db = new DataBaseAccessUtility(prop.getPropertyValue("database"));
 
-		helper = new SeleniumHelper(prop.getPropertyValue("browser"), prop.getPropertyValue("url"));
+		helper = new SeleniumHelper(prop.getPropertyValue("platform"),prop.getPropertyValue("browser"), prop.getPropertyValue("url"), prop.getPropertyValue("bsUser"), prop.getPropertyValue("bsKey"), 
+				prop.getPropertyValue("bsUrl"),prop.getPropertyValue("bsBrowserVersion"), prop.getPropertyValue("bsOs"), prop.getPropertyValue("bsOsVersion"), prop.getPropertyValue("bsBuild"), 
+				prop.getPropertyValue("bsBuildName"));
 		helper.initialization();
 		Log.setup(this.getClass().getSimpleName());
 	}
@@ -61,9 +63,11 @@ public class ScheduleManagementFlow extends Log{
 	}
 	
 
-	@AfterTest (enabled = true)
+	@AfterTest(enabled= true)
 	public void after() {
-		helper.close();
-		Log.tearDown();
+		  
+		 helper.close(); 
+		 Log.tearDown(); 
+		 
 	}
 }

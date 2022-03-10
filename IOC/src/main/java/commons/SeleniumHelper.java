@@ -1,6 +1,5 @@
 package commons;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
@@ -33,10 +32,18 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import software.amazon.awssdk.regions.Region;
+/*import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.devicefarm.DeviceFarmClient;
 import software.amazon.awssdk.services.devicefarm.model.CreateTestGridUrlRequest;
-import software.amazon.awssdk.services.devicefarm.model.CreateTestGridUrlResponse;
+import software.amazon.awssdk.services.devicefarm.model.CreateTestGridUrlResponse;*/
+
+
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.devicefarm.*;
+import software.amazon.awssdk.services.devicefarm.model.*;
+
+import java.net.MalformedURLException;
+
 
 
 public class SeleniumHelper {
@@ -47,11 +54,36 @@ public class SeleniumHelper {
 	int explicitWait = 30;
 	private String browser;
 	private String url;
-
-
+	private String bsUser;
+	private String bsKey;
+	private String bsUrl;
+	private String bsBrowserVersion;
+	private String bsOs;
+	private String bsOsVersion;
+	private String bsBuild;
+	private String bsBuildName;
+	private String platform;
+	
 	public SeleniumHelper(String browser, String url) {
 		this.browser = browser;
 		this.url = url;
+	}
+	
+	public SeleniumHelper(String platform, String browser, String url, String bsUser, String bsKey, String bsUrl, String bsBrowserVersion, 
+			String bsOs, String bsOsVersion, String bsBuild, String bsBuildName) {
+		
+		this.platform = platform;
+		this.browser = browser;
+		this.url = url;
+		this.bsUrl = bsUrl;
+		this.bsUser = bsUser;
+		this.bsKey = bsKey;
+		this.bsBrowserVersion = bsBrowserVersion;
+		this.bsOs = bsOs;
+		this.bsOsVersion = bsOsVersion;
+		this.bsBuild = bsBuild;
+		this.bsBuildName = bsBuildName;
+		
 	}
 
 	public void assertText(WebElement element, String expectedText) {
@@ -59,30 +91,40 @@ public class SeleniumHelper {
 		Assert.assertEquals(actualText, expectedText);
 	}
 
-	public void initialization() {
+
+	public void initialization() throws MalformedURLException {
 		
-		if(browser.equalsIgnoreCase("aws")) {
-			 String myProjectARN = "arn:aws:devicefarm:us-west-2:472842628937:testgrid-project:fc0eb1ca-9f14-4da3-a274-d7b27b0fe64b";
-			    DeviceFarmClient client  = DeviceFarmClient.builder().region(Region.US_EAST_1).build();
-			    CreateTestGridUrlRequest request = CreateTestGridUrlRequest.builder()
-			      .expiresInSeconds(300)
-			      .projectArn(myProjectARN)
-			      .build();
-			    CreateTestGridUrlResponse response = client.createTestGridUrl(request);
-			    URL testGridUrl = null;
-				try {
-					testGridUrl = new URL(response.url());
-				} catch (MalformedURLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			    // You can now pass this URL into RemoteWebDriver.
-			     driver = new RemoteWebDriver(testGridUrl, DesiredCapabilities.chrome());
+		String currentDir=System.getProperty("user.dir")+"/libs/";
+		
+		if(platform.equalsIgnoreCase("aws")) {
+		    String myProjectARN = "arn:aws:devicefarm:us-west-2:472842628937:testgrid-project:fc0eb1ca-9f14-4da3-a274-d7b27b0fe64b";
+	        DeviceFarmClient client  = DeviceFarmClient.builder()
+	                .region(Region.US_WEST_2)
+	                .build();
+	        CreateTestGridUrlRequest request = CreateTestGridUrlRequest.builder()
+	                .expiresInSeconds(300)
+	                .projectArn(myProjectARN)
+	                .build();
+	        CreateTestGridUrlResponse response = client.createTestGridUrl(request);
+	        URL testGridUrl = new URL(response.url());
+	        driver = new RemoteWebDriver(testGridUrl, DesiredCapabilities.chrome());
 		}
 		
+		else if(platform.equalsIgnoreCase("browserstack") || platform.equalsIgnoreCase("bs")) {
+			
+			String Browserstackurl="https://" + bsUser + ":" + bsKey + bsUrl;
+			DesiredCapabilities caps=new DesiredCapabilities();
+			caps.setCapability("browser",browser);
+			caps.setCapability("browser_version",bsBrowserVersion);
+			caps.setCapability("os", bsOs);
+			caps.setCapability("os_version", bsOsVersion);
+			caps.setCapability("build", bsBuild);
+			caps.setCapability("name",bsBuildName);
+			driver = new RemoteWebDriver(new URL(Browserstackurl), caps);
+		}
 		    
-		String currentDir=System.getProperty("user.dir")+"/libs/";
-		if(browser.equalsIgnoreCase("Chrome")) {
+		
+		else if(browser.equalsIgnoreCase("Chrome")) {
 			System.setProperty("webdriver.chrome.driver", currentDir+ "chromedriver.exe");
 			driver=new ChromeDriver();
 		}
