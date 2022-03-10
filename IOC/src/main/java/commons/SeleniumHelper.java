@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 import org.apache.commons.lang.RandomStringUtils;
-import org.junit.Assert;
+
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -31,11 +31,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-/*import software.amazon.awssdk.regions.Region;
-import software.amazon.awssdk.services.devicefarm.DeviceFarmClient;
-import software.amazon.awssdk.services.devicefarm.model.CreateTestGridUrlRequest;
-import software.amazon.awssdk.services.devicefarm.model.CreateTestGridUrlResponse;*/
+import org.testng.Assert;
 
 
 import software.amazon.awssdk.regions.Region;
